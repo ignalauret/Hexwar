@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitInfo : MonoBehaviour {
+public class HexInfo : MonoBehaviour {
 
-	public bool moved = false;
-	public int atack;
-	public int team;
-	public int speed;
-	// Use this for initialization
+	public int team = 0;
 	void Start () {
 
 	}
