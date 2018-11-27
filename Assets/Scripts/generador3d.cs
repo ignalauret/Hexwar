@@ -6,6 +6,8 @@ public class generador3d : MonoBehaviour {
 	public GameObject man0;
 	public GameObject man1;
 
+	public GameObject basePrefab;
+
 	public GameObject hex1;
 	public GameObject hex2;
 	public GameObject hex3;
@@ -13,7 +15,7 @@ public class generador3d : MonoBehaviour {
 	public GameObject hex5;
 
 	public const float oddOffset = 0.645f; //Desfasaje de las lineas impares.
-	public const float hexHight = 1f; //Altura de los Hex.
+	public const float hexHight = 0.95f; //Altura de los Hex.
 	public const float hexWidth = 1.29f; //Ancho de los Hex.
 	public const float hightOffset = 0.457f; //Desfasaje de las elevaciones.
 
@@ -61,15 +63,21 @@ public class generador3d : MonoBehaviour {
 //Creo algunos soldados para probar (Temporal).
 		GameObject TempMan0 = Instantiate(man0);
 		GameObject TempMan1 = Instantiate(man1);
-		GetComponent<Units>().moveUnitTo(TempMan0,new Vector3 (1,3,0));
-		GetComponent<Units>().moveUnitTo(TempMan1,new Vector3 (2,4,0));
+		GetComponent<Units>().moveUnitTo(TempMan0,new Vector3 (1,3,0),new Vector3(0,0,0));
+		GetComponent<Units>().moveUnitTo(TempMan1,new Vector3 (2,4,0),new Vector3(0,0,0));
 
 	}
 
 	void createBases(){
-		Random rnd = new Random();
-		Debug.Log(rnd);
+		System.Random rnd = new System.Random();
+		for(int i=0;i<5;i++){
+			int x = rnd.Next(1,10);
+			int y = rnd.Next(1,10);
+			GameObject base1 = Instantiate(basePrefab);
+			GetComponent<Units>().moveUnitTo(base1,new Vector3 (x,y,0),new Vector3 (0,0,0));
+		}
 	}
+
 
 //Funcion para elegir el color de los Hex.
 	GameObject color(int n){

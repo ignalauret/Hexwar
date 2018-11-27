@@ -5,6 +5,7 @@ using UnityEngine;
 public class HexInfo : MonoBehaviour {
 
 	public int team = 0;
+	public bool isUnit = false;
 	void Start () {
 
 	}
