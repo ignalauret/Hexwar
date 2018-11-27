@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnitInfo : MonoBehaviour {
 
+	public bool isBuilding;
 	public bool moved = false;
 	public int atack;
 	public int team;
@@ -11,6 +12,8 @@ public class UnitInfo : MonoBehaviour {
 	public int life;
 	public int range;
 	public bool contrataque = false;
+	public int cost;
+	public bool menuUnit = false;
 	// Use this for initialization
 	void Start () {
 

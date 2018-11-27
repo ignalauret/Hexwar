@@ -7,6 +7,7 @@ public class generador3d : MonoBehaviour {
 	public GameObject man1;
 
 	public GameObject basePrefab;
+	public GameObject goldPf;
 
 	public GameObject hex1;
 	public GameObject hex2;
@@ -24,9 +25,11 @@ public class generador3d : MonoBehaviour {
 
 	public int[,] alturas = new int[mapWidth,mapHight]; //Arreglo con las alturas.
 	public GameObject[,] hexMap = new GameObject[mapWidth,mapHight]; // Arreglo con los Hex.
+	public int[,] recursos = new int [mapWidth,mapHight]; //Arreglo con los recursos
 
 	float x = 0f;
 	float y = 0f;
+	bool CheckMoved;
 
 	void Start () {
 		createHexMap();
@@ -63,8 +66,8 @@ public class generador3d : MonoBehaviour {
 //Creo algunos soldados para probar (Temporal).
 		GameObject TempMan0 = Instantiate(man0);
 		GameObject TempMan1 = Instantiate(man1);
-		GetComponent<Units>().moveUnitTo(TempMan0,new Vector3 (1,3,0),new Vector3(0,0,0));
-		GetComponent<Units>().moveUnitTo(TempMan1,new Vector3 (2,4,0),new Vector3(0,0,0));
+		CheckMoved = GetComponent<Units>().moveUnitTo(TempMan0,new Vector3 (1,3,0),new Vector3(0,0,0));
+		CheckMoved = GetComponent<Units>().moveUnitTo(TempMan1,new Vector3 (2,4,0),new Vector3(0,0,0));
 
 	}
 
@@ -74,7 +77,22 @@ public class generador3d : MonoBehaviour {
 			int x = rnd.Next(1,10);
 			int y = rnd.Next(1,10);
 			GameObject base1 = Instantiate(basePrefab);
-			GetComponent<Units>().moveUnitTo(base1,new Vector3 (x,y,0),new Vector3 (0,0,0));
+			CheckMoved = GetComponent<Units>().moveUnitTo(base1,new Vector3 (x,y,0),new Vector3 (0,0,0));
+			if(!CheckMoved) i-=1;
+		}
+		GameObject gold = Instantiate(goldPf);
+		CheckMoved = GetComponent<Units>().moveUnitTo(gold,new Vector3 (4,4,0),new Vector3 (0,0,0));
+		gold.transform.Translate(new Vector3 (0,-0.3f,0));
+		recursos[4,4] = 1;
+		for(int i=0;i<3;i++){
+			int x = rnd.Next(1,10);
+			int y = rnd.Next(1,10);
+			gold = Instantiate(goldPf);
+			CheckMoved = GetComponent<Units>().moveUnitTo(gold,new Vector3 (x,y,0),new Vector3 (0,0,0));
+			if(CheckMoved){
+				gold.transform.Translate(new Vector3 (0,-0.3f,0));
+				recursos[x,y] = 1;
+			}
 		}
 	}
 
